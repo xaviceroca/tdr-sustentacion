@@ -5,23 +5,29 @@ import numpy as np
 import os
 from dotenv import load_dotenv
 
-# 1. Configuración de la página (opcional, pero ayuda a que se vea mejor)
-st.set_page_config(
-    page_title="Mi Aplicación",
-    layout="wide",  # "wide" usa toda la pantalla, "centered" deja márgenes anchos
-    initial_sidebar_state="collapsed"
-)
+# Configuración de página (mantenla si ya la tienes)
+st.set_page_config(layout="wide", page_title="Aerodynamics Pro")
 
-# 2. Código CSS para ocultar elementos de la interfaz de Streamlit
-hide_streamlit_style = """
-            <style>
-            #MainMenu {visibility: hidden;}
-            footer {visibility: hidden;}
-            header {visibility: hidden;}
-            .stDeployButton {display:none;}
-            </style>
-            """
-st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+# --- CSS PARA OCULTAR TODO (INCLUIDO EL BADGE DE STREAMLIT CLOUD) ---
+hide_elements = """
+    <style>
+    /* Ocultar menú hamburguesa superior derecha */
+    #MainMenu {visibility: hidden;}
+    
+    /* Ocultar el pie de página completo */
+    footer {visibility: hidden !important;}
+    
+    /* Ocultar la barra de decoración superior */
+    header {visibility: hidden !important;}
+
+    /* Ocultar específicamente el badge de "Hosted with Streamlit" */
+    .stApp > footer {display: none !important;}
+    
+    /* Opción extra: elimina el espacio en blanco que dejan los elementos ocultos */
+    div.block-container {padding-top: 1rem;}
+    </style>
+"""
+st.markdown(hide_elements, unsafe_allow_html=True)
 
 # --- CONFIGURACIÓN DE LA PÁGINA ---
 st.set_page_config(
@@ -300,3 +306,4 @@ with tab_ai:
             except Exception as e:
 
                 st.error(f"Error de conexión con la IA: {e}")
+
