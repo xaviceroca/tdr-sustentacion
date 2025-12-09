@@ -5,29 +5,28 @@ import numpy as np
 import os
 from dotenv import load_dotenv
 
-# Configuración de página (mantenla si ya la tienes)
-st.set_page_config(layout="wide", page_title="Aerodynamics Pro")
-
-# --- CSS PARA OCULTAR TODO (INCLUIDO EL BADGE DE STREAMLIT CLOUD) ---
-hide_elements = """
+# --- CÓDIGO CSS PARA OCULTAR EL BADGE "CREATED BY" ---
+hide_github_icon = """
     <style>
-    /* Ocultar menú hamburguesa superior derecha */
+    /* 1. Ocultar menú y header estándar */
     #MainMenu {visibility: hidden;}
-    
-    /* Ocultar el pie de página completo */
-    footer {visibility: hidden !important;}
-    
-    /* Ocultar la barra de decoración superior */
-    header {visibility: hidden !important;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
 
-    /* Ocultar específicamente el badge de "Hosted with Streamlit" */
-    .stApp > footer {display: none !important;}
+    /* 2. Ocultar el badge específico de Streamlit Cloud (El de 'Created by') */
+    /* Busca cualquier div cuya clase contenga la palabra 'viewerBadge' */
+    div[class*="viewerBadge"] {
+        display: none !important;
+    }
     
-    /* Opción extra: elimina el espacio en blanco que dejan los elementos ocultos */
-    div.block-container {padding-top: 1rem;}
+    /* 3. (Opcional) Ajustar márgenes superiores para que no quede hueco */
+    .block-container {
+        padding-top: 0rem;
+    }
     </style>
 """
-st.markdown(hide_elements, unsafe_allow_html=True)
+
+st.markdown(hide_github_icon, unsafe_allow_html=True)
 
 # --- CONFIGURACIÓN DE LA PÁGINA ---
 st.set_page_config(
@@ -306,4 +305,5 @@ with tab_ai:
             except Exception as e:
 
                 st.error(f"Error de conexión con la IA: {e}")
+
 
