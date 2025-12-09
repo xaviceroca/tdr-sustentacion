@@ -5,6 +5,24 @@ import numpy as np
 import os
 from dotenv import load_dotenv
 
+# 1. Configuración de la página (opcional, pero ayuda a que se vea mejor)
+st.set_page_config(
+    page_title="Mi Aplicación",
+    layout="wide",  # "wide" usa toda la pantalla, "centered" deja márgenes anchos
+    initial_sidebar_state="collapsed"
+)
+
+# 2. Código CSS para ocultar elementos de la interfaz de Streamlit
+hide_streamlit_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            .stDeployButton {display:none;}
+            </style>
+            """
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
 # --- CONFIGURACIÓN DE LA PÁGINA ---
 st.set_page_config(
     page_title="AeroDynamics Pro",
@@ -280,4 +298,5 @@ with tab_ai:
                     st.chat_message("assistant").write(rta)
             
             except Exception as e:
+
                 st.error(f"Error de conexión con la IA: {e}")
